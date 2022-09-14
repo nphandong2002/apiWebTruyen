@@ -25,4 +25,8 @@ public class BookDTO {
 
     private String path;
 
+    private int numberChapter;
+
+    private int numberRead;
+
 }

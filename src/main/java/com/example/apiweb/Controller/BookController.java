@@ -71,6 +71,8 @@ public class BookController {
                 bd.setBookPoster("http://localhost:" + env.getProperty("server.port") + b.getBookPoster());
                 bd.setSummary(b.getSummary());
                 bd.setPath(b.getUrl());
+                bd.setNumberChapter(bookService.getNumberChapter(b.getId()));
+                bd.setNumberRead(b.getUserId());
                 listbook.add(bd);
             }
             return Response.success(Constants.RESPONSE_CODE.SUCCESS).withData(listbook);
@@ -88,6 +90,8 @@ public class BookController {
             bdDTO.setName(bt.getChapter());
             bdDTO.setNote(bt.getNote());
             bd.setChapter(bdDTO);
+            bd.setNumberChapter(bookService.getNumberChapter(b.getId()));
+            bd.setNumberRead(b.getUserId());
             return Response.success(Constants.RESPONSE_CODE.SUCCESS).withData(bd);
         }
     }
@@ -113,7 +117,7 @@ public class BookController {
     }
     @PostMapping("/book/chapterNew")
     public @ResponseBody Response getChapterNew(){
-        List<BookdetailsEntity> listdb = bookService.getChapter();
+        List<BookdetailsEntity> listdb = bookService.getChapterNew();
         List<BookDTO> listbook = new ArrayList<>();
 
         for(BookdetailsEntity book: listdb){

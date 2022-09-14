@@ -86,8 +86,12 @@ public class BookService {
         return bd;
     }
 
-    public List<BookdetailsEntity> getChapter(){
+    public List<BookdetailsEntity> getChapterNew(){
         return bookdbRepo.findChaperNew();
+    }
+
+    public int getNumberChapter(int bookID){
+        return bookdbRepo.findBookdetailsEntitiesByBookId(bookID).size();
     }
 
 }

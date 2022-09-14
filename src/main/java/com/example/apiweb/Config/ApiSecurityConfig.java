@@ -49,7 +49,7 @@ public class ApiSecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable()
                 .authorizeRequests()
 //                .antMatchers("/api/**").hasAnyAuthority("user","admin","qtv")
-                .antMatchers("/", "/api/login", "/api/logout","/api/register","/api/category/","/img/**","/*.jpg").permitAll()
+                .antMatchers("/", "/api/login", "/api/logout","/api/register","/api/category/","/img/**","/*.jpg","/book/**").permitAll()
 
                 .anyRequest().authenticated()
                 .and().logout().logoutUrl("/api/logout")

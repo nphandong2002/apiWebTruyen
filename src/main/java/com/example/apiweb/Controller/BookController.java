@@ -56,7 +56,7 @@ public class BookController {
 
     @PostMapping("/book")
     public @ResponseBody Response getBook(@RequestParam(name = "id") int id,
-                                          @RequestParam(name = "chapter" , required = false , defaultValue = "0") Integer chapter,
+                                          @RequestParam(name = "chapter" , required = false , defaultValue = "1") Integer chapter,
 
                                           @RequestParam(name = "limit" , required = false , defaultValue = "5") Integer limit,
                                           @RequestParam(name = "page" , required = false , defaultValue = "0") Integer page){

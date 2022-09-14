@@ -81,10 +81,9 @@ public class BookService {
     }
     public BookdetailsEntity getChapterBook(int bookId, int chapter){
         List<BookdetailsEntity> listdb = bookdbRepo.findBookdetailsEntitiesByBookId(bookId);
-        List<BookdetailsEntity> list = (List<BookdetailsEntity>) bookdbRepo.findAll(PageRequest.of(chapter,1, Sort.by("id")));
-        BookdetailsEntity bd = list.get(0);
-        BookdetailsEntity find = bookdbRepo.findBookdetailsEntityById(bd.getBookId());
-        return find;
+        List<BookdetailsEntity> list =  bookdbRepo.findAll();
+        BookdetailsEntity bd = listdb.get(chapter - 1);
+        return bd;
     }
 
     public List<BookdetailsEntity> getChapter(){

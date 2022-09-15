@@ -10,4 +10,5 @@ import lombok.Setter;
 public class BookDBDTO {
     private String name;
     private String Note;
+    private String path;
 }

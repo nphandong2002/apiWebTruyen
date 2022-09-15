@@ -89,6 +89,8 @@ public class BookController {
             BookDBDTO bdDTO = new BookDBDTO();
             bdDTO.setName(bt.getChapter());
             bdDTO.setNote(bt.getNote());
+            bdDTO.setPath("/book/"+b.getId() + "/chapter/"+bt.getId());
+            bd.setPath(b.getUrl());
             bd.setChapter(bdDTO);
             bd.setNumberChapter(bookService.getNumberChapter(b.getId()));
             bd.setNumberRead(b.getUserId());
@@ -133,6 +135,7 @@ public class BookController {
                     bd.setPath(b.getUrl());
                     BookDBDTO bdbDTO  = new BookDBDTO();
                     bdbDTO.setName(book.getChapter());
+                    bdbDTO.setPath("/book/"+b.getId() + "/chapter/"+b.getId());
                     bd.setChapter(bdbDTO);
 
                     listbook.add(bd);
@@ -141,4 +144,27 @@ public class BookController {
         }
         return Response.success(Constants.RESPONSE_CODE.SUCCESS).withData(listbook);
     }
+    @PostMapping("/book/chapter/{id}")
+    public @ResponseBody Response getChapter(@PathVariable("id") int bookID){
+        List<BookdetailsEntity> listdb = bookService.getChapter(bookID);
+        List<BookDBDTO> bdbDTO  = new ArrayList<>();
+
+        BookEntity b = bookService.getById(bookID);
+        BookDTO bd = new BookDTO();
+        bd.setName(b.getBookName());
+        bd.setCategory(bookService.getCabyID(b.getCategoryId()).getName());
+        bd.setAther_name(userService.getUserbyId(b.getAuthorId()).getName());
+        bd.setBookPoster("http://localhost:" + env.getProperty("server.port") + b.getBookPoster());
+        bd.setSummary(b.getSummary());
+        bd.setPath(b.getUrl());
+        for(BookdetailsEntity book: listdb){
+            BookDBDTO bdbDTO2  = new BookDBDTO();
+            bdbDTO2.setName(book.getChapter());
+            bdbDTO2.setPath("/book/"+b.getId() + "/chapter/"+(bdbDTO.size() + 1));
+            bdbDTO.add(bdbDTO2);
+        }
+        bd.setListChapter(bdbDTO);
+        return Response.success(Constants.RESPONSE_CODE.SUCCESS).withData(bd);
+    }
+
 }

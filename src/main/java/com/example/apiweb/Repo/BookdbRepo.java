@@ -14,4 +14,6 @@ public interface BookdbRepo extends JpaRepository<BookdetailsEntity,Integer> {
     BookdetailsEntity findBookdetailsEntityById(int id);
     @Query(value = "select f.* from (SELECT * FROM `bookdetails` ORDER BY bookdetails.id DESC) f limit 5;",nativeQuery = true)
     List<BookdetailsEntity> findChaperNew();
+
+
 }
